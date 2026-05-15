@@ -7,6 +7,7 @@ const errorCount = document.getElementById('error-count')
 const resetBtn = document.getElementById('reset-btn')
 const somAcerto = new Audio('acertou.mp3')
 const somErro = new Audio('errou.mp3')
+const dificuldadeInput = document.getElementById('dificuldade-input')
 
 const URL_API = 'https://api-palavras-8ptt.onrender.com/'
 
@@ -24,7 +25,7 @@ async function iniciarJogo(event) {
                 method: 'POST',
                 credentials: 'include',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify( {nickname: nickname} )
+                body: JSON.stringify( {nickname: nickname, nivel: dificuldadeInput.value} )
             }
         );
 
