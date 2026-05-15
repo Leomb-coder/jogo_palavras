@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #0f0e11;
+  --surface: #1a1820;
+  --surface-2: #231f2e;
+  --accent: #c8f047;
+  --accent-dim: #9ab832;
+  --text: #f0edf8;
+  --text-muted: #7a7490;
+  --danger: #ff5e6c;
+  --slot-border: #3d3850;
+  --slot-filled: #c8f047;
+  --radius: 16px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'DM Mono', monospace;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(200, 240, 71, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(140, 100, 255, 0.08) 0%, transparent 50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--text);
+}
+
+.container {
+  background: var(--surface);
+  padding: 2.5rem 2rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(200, 240, 71, 0.12);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 24px 60px rgba(0,0,0,0.5),
+    0 0 80px rgba(200, 240, 71, 0.04);
+  text-align: center;
+  width: 420px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.5s ease both;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+h1 span {
+  color: var(--accent);
+}
+
+h2#player-display {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+h2#player-display::before {
+  content: '▸ ';
+  color: var(--accent);
+}
+
+.hidden { display: none !important; }
+
+/* ── Nickname Input ── */
+#setup-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+input {
+  background: var(--surface-2);
+  border: 1px solid var(--slot-border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.95rem;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  caret-color: var(--accent);
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200, 240, 71, 0.12);
+}
+
+#nickname-input {
+  width: 100%;
+  font-size: 1rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+
+/* ── Word Slots ── */
+.word-slots {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 1.5rem 0;
+}
+
+.letter-slot {
+  width: 36px;
+  height: 48px;
+  border: none;
+  border-bottom: 3px solid var(--slot-border);
+  background: transparent;
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, transform 0.15s;
+  position: relative;
+}
+
+.letter-slot.filled {
+  border-color: var(--slot-filled);
+  animation: popIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0.4; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+/* ── Letter Input ── */
+#letter-input {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  border-radius: 12px;
+  padding: 0;
+}
+
+/* ── Status Info ── */
+.status-info {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.status-info p {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.status-info span#error-count {
+  color: var(--danger);
+  font-weight: 500;
+}
+
+#game-message {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  min-height: 1.4em;
+  margin-top: 0.2rem;
+}
+
+/* ── Button ── */
+button {
+  margin-top: 1.5rem;
+  padding: 12px 28px;
+  background: var(--accent);
+  color: #0f0e11;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(200, 240, 71, 0.2);
+}
+
+button:hover {
+  background: #d9ff55;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(200, 240, 71, 0.3);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* ── Error shake animation ── */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-5px); }
+  80%       { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.35s ease;
+}
