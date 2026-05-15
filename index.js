@@ -6,6 +6,7 @@ const gameMessage = document.getElementById('game-message')
 const errorCount = document.getElementById('error-count')
 const resetBtn = document.getElementById('reset-btn')
 const somAcerto = new Audio('acertou.mp3')
+const hintDisplay = document.getElementById('hint-display')
 const somErro = new Audio('errou.mp3')
 const dificuldadeInput = document.getElementById('dificuldade-input')
 
@@ -39,6 +40,7 @@ async function iniciarJogo(event) {
         setupContainer.classList.add('hidden')
         gameContainer.classList.remove('hidden')
         document.getElementById('player-display').innerText = data.mensagem
+        document.getElementById('dificuldade-display').innerText = `Dificuldade: ${dificuldadeInput.value}`.toUpperCase()
 
         buscarPalavra()
     }
@@ -55,6 +57,9 @@ async function buscarPalavra() {
     const data = await response.json()
 
     wordDisplay.innerHTML = ''
+
+    // Mostra a dica
+    hintDisplay.innerText = `Dica: ${data.dica}`
 
     // Cria os espaços dos caracteres da palavra sorteada
     for (let i = 0; i < data.qtde_caracteres; i++) {

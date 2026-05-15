@@ -141,6 +141,14 @@ input:focus {
   margin: 1.5rem 0;
 }
 
+.hint {
+    margin: 15px 0;
+    padding: 10px 16px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    font-size: 18px;
+}
+
 .letter-slot {
   width: 36px;
   height: 48px;
